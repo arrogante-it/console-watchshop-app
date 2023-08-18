@@ -11,8 +11,8 @@ import java.util.Date;
 @Getter
 @Setter
 public class Watch {
-    private String brand;
+    private Brand brand;
     private BigDecimal price;
-    private String color;
+    private Color color;
     private Date arrivalDate;
 }

@@ -1,6 +1,8 @@
 package com.watchshop.app.viewer;
 
 import com.watchshop.app.controller.WatchController;
+import com.watchshop.app.model.Brand;
+import com.watchshop.app.model.Color;
 import com.watchshop.app.model.Watch;
 
 import java.math.BigDecimal;
@@ -67,18 +69,23 @@ public class WatchViewImpl implements WatchView {
 
     public void addNewWatchView() {
         System.out.print("Enter watch brand: ");
-        String brand = watchController.inputBrand();
+        //Brand brand1 = Brand.valueOf(watchController.inputBrand().toUpperCase());
+        String brandName = watchController.inputBrand();
 
         System.out.print("Enter watch price: ");
         BigDecimal price = watchController.inputPrice();
 
         System.out.print("Enter watch color: ");
-        String color = watchController.inputColor();
+        //Color color = Color.valueOf(watchController.inputColor().toUpperCase());
+        String colorName = watchController.inputColor();
 
         System.out.print("Enter the date of watch receipt (в формате \"dd.MM.yyyy\"): ");
         Date arrivalDate = watchController.inputAndParseArrivalDate();
 
         System.out.println("Adding new watch...");
+        Brand brand = Brand.valueOf(brandName);
+        Color color = Color.valueOf(colorName);
+
         watchController.addNewWatch(brand, price, color, arrivalDate);
         displayMessage("New Watch successfully added.");
     }

@@ -1,5 +1,7 @@
 package com.watchshop.app.controller;
 
+import com.watchshop.app.model.Brand;
+import com.watchshop.app.model.Color;
 import com.watchshop.app.model.Watch;
 import lombok.RequiredArgsConstructor;
 
@@ -21,9 +23,9 @@ public class WatchControllerImpl implements WatchController {
 
     @Override
     public void initializeWatches() {
-        addNewWatch("Brolex", new BigDecimal(150.0), "Black", new Date());
-        addNewWatch("Anot-rolex", new BigDecimal(100.0), "White", new Date());
-        addNewWatch("Cany-watch", new BigDecimal(200.0), "Silver", new Date());
+        addNewWatch(Brand.BROLEX, new BigDecimal(150.0), Color.BLACK, new Date());
+        addNewWatch(Brand.ANOT_ROLEX, new BigDecimal(100.0),Color.WHITE , new Date());
+        addNewWatch(Brand.CANY_ROLEX, new BigDecimal(200.0), Color.SILVER, new Date());
 
     }
 
@@ -57,11 +59,11 @@ public class WatchControllerImpl implements WatchController {
     }
 
     @Override
-    public void addNewWatch(String brand, BigDecimal price, String color, Date arrivalDate) {
+    public void addNewWatch(Brand brand, BigDecimal price, Color color, Date arrivalDate) {
         setWatch(brand, price, color, arrivalDate);
     }
 
-    private void setWatch(String brand, BigDecimal price, String color, Date arrivalDate) {
+    private void setWatch(Brand brand, BigDecimal price, Color color, Date arrivalDate) {
         Watch watch = new Watch()
                 .setBrand(brand)
                 .setPrice(price)

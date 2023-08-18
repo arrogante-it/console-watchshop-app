@@ -1,5 +1,7 @@
 package com.watchshop.app.controller;
 
+import com.watchshop.app.model.Brand;
+import com.watchshop.app.model.Color;
 import com.watchshop.app.model.Watch;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -8,7 +10,7 @@ import java.util.List;
 public interface WatchController {
     void initializeWatches();
 
-    void addNewWatch(String brand, BigDecimal price, String color, Date arrivalDate);
+    void addNewWatch(Brand brand, BigDecimal price, Color color, Date arrivalDate);
 
     List<Watch> getAllWatches();
 

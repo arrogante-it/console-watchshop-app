@@ -1,5 +1,7 @@
 package com.watchshop.app.controller;
 
+import com.watchshop.app.model.Brand;
+import com.watchshop.app.model.Color;
 import com.watchshop.app.model.Watch;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,9 +26,9 @@ public class WatchControllerImplTest {
 
     @Test
     public void testAddNewWatch() {
-        String brand = "TestBrand";
+        Brand brand = Brand.BROLEX;
         BigDecimal price = BigDecimal.valueOf(99.99);
-        String color = "TestColor";
+        Color color = Color.BLACK;
         Date arrivalDate = new Date();
 
         watchController.addNewWatch(brand, price, color, arrivalDate);
@@ -43,9 +45,9 @@ public class WatchControllerImplTest {
 
     @Test
     public void testSortByPrice() {
-        watchController.addNewWatch("TestBrand1", BigDecimal.valueOf(200), "TestColor1", new Date());
-        watchController.addNewWatch("TestBrand2", BigDecimal.valueOf(100), "TestColor2", new Date());
-        watchController.addNewWatch("TestBrand3", BigDecimal.valueOf(150), "TestColor3", new Date());
+        watchController.addNewWatch(Brand.BROLEX, BigDecimal.valueOf(200), Color.BLACK, new Date());
+        watchController.addNewWatch(Brand.ANOT_ROLEX, BigDecimal.valueOf(100), Color.SILVER, new Date());
+        watchController.addNewWatch(Brand.CANY_ROLEX, BigDecimal.valueOf(150), Color.WHITE, new Date());
 
         watchController.sortByPrice();
 
@@ -58,17 +60,17 @@ public class WatchControllerImplTest {
 
     @Test
     public void testSortByColor() {
-        watchController.addNewWatch("TestBrand1", BigDecimal.valueOf(100), "B_Color", new Date());
-        watchController.addNewWatch("TestBrand2", BigDecimal.valueOf(150), "C_Color", new Date());
-        watchController.addNewWatch("TestBrand3", BigDecimal.valueOf(50), "A_Color", new Date());
+        watchController.addNewWatch(Brand.BROLEX, BigDecimal.valueOf(100),  Color.SILVER, new Date());
+        watchController.addNewWatch(Brand.BROLEX, BigDecimal.valueOf(150), Color.WHITE, new Date());
+        watchController.addNewWatch(Brand.BROLEX, BigDecimal.valueOf(50), Color.BLACK, new Date());
 
         watchController.sortByColor();
 
         List<Watch> sortedWatches = watchController.getAllWatches();
 
-        assertEquals("A_Color", sortedWatches.get(0).getColor());
-        assertEquals("B_Color", sortedWatches.get(1).getColor());
-        assertEquals("C_Color", sortedWatches.get(2).getColor());
+        assertEquals(Color.BLACK, sortedWatches.get(0).getColor());
+        assertEquals(Color.WHITE, sortedWatches.get(1).getColor());
+        assertEquals(Color.SILVER, sortedWatches.get(2).getColor());
     }
 
     @Test
@@ -79,9 +81,9 @@ public class WatchControllerImplTest {
         Date date2 = dateFormat.parse("02.01.2023");
         Date date3 = dateFormat.parse("03.01.2023");
 
-        watchController.addNewWatch("TestBrand1", BigDecimal.valueOf(100), "B_Color", date3);
-        watchController.addNewWatch("TestBrand2", BigDecimal.valueOf(150), "C_Color", date2);
-        watchController.addNewWatch("TestBrand3", BigDecimal.valueOf(50), "A_Color", date1);
+        watchController.addNewWatch(Brand.BROLEX, BigDecimal.valueOf(100),Color.SILVER, date3);
+        watchController.addNewWatch(Brand.BROLEX, BigDecimal.valueOf(150), Color.SILVER, date2);
+        watchController.addNewWatch(Brand.BROLEX, BigDecimal.valueOf(50), Color.SILVER, date1);
 
         watchController.sortByArrivalDate();
 
@@ -94,9 +96,9 @@ public class WatchControllerImplTest {
 
     @Test
     public void testGetTotalCost() {
-        watchController.addNewWatch("TestBrand1", BigDecimal.valueOf(100), "B_Color", new Date());
-        watchController.addNewWatch("TestBrand2", BigDecimal.valueOf(150), "C_Color", new Date());
-        watchController.addNewWatch("TestBrand3", BigDecimal.valueOf(200), "A_Color", new Date());
+        watchController.addNewWatch(Brand.BROLEX, BigDecimal.valueOf(100), Color.SILVER, new Date());
+        watchController.addNewWatch(Brand.BROLEX, BigDecimal.valueOf(150), Color.SILVER, new Date());
+        watchController.addNewWatch(Brand.BROLEX, BigDecimal.valueOf(200), Color.SILVER, new Date());
 
         BigDecimal expectedHardCodedPriceSum = BigDecimal.valueOf(450);
 
