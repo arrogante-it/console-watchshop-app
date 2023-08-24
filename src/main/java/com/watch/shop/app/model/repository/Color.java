@@ -1,4 +1,4 @@
-package com.watchshop.app.model;
+package com.watch.shop.app.model.repository;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -8,7 +8,10 @@ import lombok.RequiredArgsConstructor;
 public enum Color {
     BLACK("Black"),
     WHITE("White"),
-    SILVER("Silver");
+    SILVER("Silver"),
+    METAL_BLUE("Metal Blue"),
+    GOLD("Gold"),
+    DARK_GREEN("Dark Green");
 
     private final String name;
 }

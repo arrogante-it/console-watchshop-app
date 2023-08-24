@@ -18,14 +18,14 @@
 - Maven 4.0.0 or higher
 
 ## Program main functional:
-- #### addWatch
+- #### add new watch
 
-- #### getAllWatches
+- #### get all watches
 
-- #### sortWatchesByPrice
+- #### sort watches by price
 
-- #### sortWatchesByColor
+- #### sort watches by color
 
-- #### sortWatchesByArrivalDate
+- #### sort watches by arrival date
 
-- #### getTotalCost
+- #### get total cost
