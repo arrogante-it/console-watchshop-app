@@ -1,10 +1,5 @@
 package com.watch.shop.app.model.repository;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
-@Getter
 public enum Brand {
     CASIO("Casio"),
     ARMANI("Armani"),
@@ -13,4 +8,12 @@ public enum Brand {
     DW("Daniel Wellington");
 
     private final String name;
+
+    Brand(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

@@ -30,6 +30,7 @@ public class InputHandler {
 
     private static boolean isDate(String value) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
         try {
             LocalDate.parse(value, formatter);
             return true;

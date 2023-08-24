@@ -1,10 +1,5 @@
 package com.watch.shop.app.model.repository;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
-@Getter
 public enum Mechanism {
     QUARTZ("QUARTZ"),
     MECHANICAL("MECHANICAL"),
@@ -12,4 +7,12 @@ public enum Mechanism {
     KINETIC("KINETIC");
 
     private final String name;
+
+    Mechanism(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

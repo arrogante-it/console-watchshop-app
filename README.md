@@ -1,12 +1,12 @@
-# Console WatchShop Application
+# WatchShop Application
 
-##### WatchShop with basic shop operation.
+##### Console Watch shop with basic shop operation.
  
 ##### Code is covered with unit tests with JUnit. 
 
 ## Install application:
 - Clone application to your directory:
-`git clone https://github.com/arrogante-it/console-watchshop-app.git`
+`git clone https://github.com/arrogante-it/watch-shop-app.git`
 
 - Build project: `mvn clean install`
 

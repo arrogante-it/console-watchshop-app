@@ -1,10 +1,5 @@
 package com.watch.shop.app.model.repository;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
-@Getter
 public enum Color {
     BLACK("Black"),
     WHITE("White"),
@@ -14,4 +9,12 @@ public enum Color {
     DARK_GREEN("Dark Green");
 
     private final String name;
+
+    Color(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

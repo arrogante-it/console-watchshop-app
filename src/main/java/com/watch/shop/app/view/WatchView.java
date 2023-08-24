@@ -1,11 +1,10 @@
 package com.watch.shop.app.view;
 
 import com.watch.shop.app.model.repository.Watch;
-import com.watch.shop.app.model.service.WatchService;
 
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+
 import static com.watch.shop.app.view.Constants.NO_AVAILABLE_WATCHES;
 import static com.watch.shop.app.view.Constants.AVAILABLE_WATCHES;
 

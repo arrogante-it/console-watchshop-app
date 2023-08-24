@@ -42,6 +42,7 @@ public class WatchController {
 
     public void run() {
         Scanner scanner = new Scanner(System.in);
+
         dataGenerator.initializeWatches();
 
         while (true) {
@@ -50,6 +51,7 @@ public class WatchController {
 
             int choice = scanner.nextInt();
             scanner.nextLine();
+
             System.out.print('\n');
 
             switch (choice) {
@@ -125,7 +127,7 @@ public class WatchController {
         Mechanism mechanism = Mechanism.valueOf(mechanismName);
         Type type = Type.valueOf(typeName);
 
-        service.addNewWatch(brand, price, color,mechanism, type, arrivalDate);
+        service.addNewWatch(brand, price, color, mechanism, type, arrivalDate);
         view.displayMessage(ADDED_WATCH_MESSAGE);
     }
 }
