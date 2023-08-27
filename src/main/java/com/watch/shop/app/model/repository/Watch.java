@@ -2,6 +2,7 @@ package com.watch.shop.app.model.repository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Watch {
     private Brand brand;
@@ -11,6 +12,19 @@ public class Watch {
     private Mechanism mechanism;
     private Type type;
     private LocalDate arrivalDate;
+
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+    @Override
+    public String toString() {
+        return String.format("Brand: %-15s | Price: $%-10s | Color: %-10s | Mechanism: %-15s | Type: %-10s | Arrival Date: %s",
+                brand,
+                price,
+                color,
+                mechanism,
+                type,
+                FORMATTER.format(arrivalDate));
+    }
 
     public static class Builder {
         private Brand brand;

@@ -12,8 +12,8 @@ public class TestDataGenerator {
 
         Watch watch1 = new Watch.Builder()
                 .brand(Brand.ARMANI)
-                .price( new BigDecimal(150.0))
-                .color( Color.BLACK)
+                .price(new BigDecimal(150.0))
+                .color(Color.BLACK)
                 .mechanism(Mechanism.MECHANICAL)
                 .type(Type.WRIST)
                 .arrivalDate(LocalDate.now())
@@ -21,7 +21,7 @@ public class TestDataGenerator {
 
         Watch watch2 = new Watch.Builder()
                 .brand(Brand.CASIO)
-                .price( new BigDecimal(200.0))
+                .price(new BigDecimal(200.0))
                 .color(Color.METAL_BLUE)
                 .mechanism(Mechanism.KINETIC)
                 .type(Type.WRIST)

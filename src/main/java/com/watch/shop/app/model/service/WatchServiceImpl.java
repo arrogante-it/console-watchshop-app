@@ -10,7 +10,6 @@ import com.watch.shop.app.model.repository.Watch;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -23,10 +22,6 @@ public class WatchServiceImpl implements WatchService {
 
     @Override
     public void addNewWatch(Brand brand, BigDecimal price, Color color, Mechanism mechanism, Type type, LocalDate arrivalDate) {
-        setWatch(brand, price, color, mechanism, type, arrivalDate);
-    }
-
-    private void setWatch(Brand brand, BigDecimal price, Color color, Mechanism mechanism, Type type, LocalDate arrivalDate) {
         Watch watch = new Watch.Builder()
                 .brand(brand)
                 .price(price)
@@ -36,7 +31,11 @@ public class WatchServiceImpl implements WatchService {
                 .arrivalDate(arrivalDate)
                 .build();
 
-        new ArrayList<>(watches).add(watch);
+        List<Watch> updatedWatches = new ArrayList<>(watches);
+        updatedWatches.add(watch);
+
+        watches.clear();
+        watches.addAll(updatedWatches);
     }
 
     @Override
@@ -46,23 +45,34 @@ public class WatchServiceImpl implements WatchService {
 
     @Override
     public void sortByPrice() {
-        new ArrayList<>(watches).sort(Comparator.comparing(Watch::getPrice));
+        List<Watch> sortedWatches = new ArrayList<>(watches);
+        sortedWatches.sort(Comparator.comparing(Watch::getPrice));
+
+        watches.clear();
+        watches.addAll(sortedWatches);
     }
 
     @Override
     public void sortByColor() {
-        new ArrayList<>(watches).sort(Comparator.comparing(Watch::getColor));
+        List<Watch> sortedWatches = new ArrayList<>(watches);
+        sortedWatches.sort(Comparator.comparing(Watch::getColor));
+
+        watches.clear();
+        watches.addAll(sortedWatches);
     }
 
     @Override
     public void sortByArrivalDate() {
-        new ArrayList<>(watches).sort(Comparator.comparing(Watch::getArrivalDate));
+        List<Watch> sortedWatches = new ArrayList<>(watches);
+        sortedWatches.sort(Comparator.comparing(Watch::getArrivalDate));
+
+        watches.clear();
+        watches.addAll(sortedWatches);
     }
 
     @Override
     public BigDecimal getTotalCost() {
-        return new ArrayList<>(watches)
-                .stream()
+        return watches.stream()
                 .map(Watch::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }

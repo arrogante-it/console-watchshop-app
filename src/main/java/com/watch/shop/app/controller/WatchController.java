@@ -7,24 +7,23 @@ import com.watch.shop.app.model.repository.Type;
 import com.watch.shop.app.model.service.WatchService;
 import static com.watch.shop.app.view.Constants.ADDED_WATCH_MESSAGE;
 import static com.watch.shop.app.view.Constants.ADDING_WATCH_MESSAGE;
-import static com.watch.shop.app.view.Constants.ENTER_BRAND;
-import static com.watch.shop.app.view.Constants.ENTER_COLOR;
-import static com.watch.shop.app.view.Constants.ENTER_DATE;
-import static com.watch.shop.app.view.Constants.ENTER_MECHANISM;
-import static com.watch.shop.app.view.Constants.ENTER_PRICE;
-import static com.watch.shop.app.view.Constants.ENTER_TYPE;
-import static com.watch.shop.app.view.Constants.MENU;
-import static com.watch.shop.app.view.Constants.NEXT_LINE;
-import static com.watch.shop.app.view.Constants.NOT_RIGHT_CHOOSE;
-import static com.watch.shop.app.view.Constants.OUTPUT;
-import static com.watch.shop.app.view.Constants.TITLE;
-import static com.watch.shop.app.view.Constants.TOTAL_COST;
+import static com.watch.shop.app.view.Constants.APPLICATION_TITLE;
+import static com.watch.shop.app.view.Constants.ENTER_BRAND_MESSAGE;
+import static com.watch.shop.app.view.Constants.ENTER_COLOR_MESSAGE;
+import static com.watch.shop.app.view.Constants.ENTER_DATE_MESSAGE;
+import static com.watch.shop.app.view.Constants.ENTER_MECHANISM_MESSAGE;
+import static com.watch.shop.app.view.Constants.ENTER_PRICE_MESSAGE;
+import static com.watch.shop.app.view.Constants.ENTER_TYPE_MESSAGE;
+import static com.watch.shop.app.view.Constants.MAIN_MENU;
+import static com.watch.shop.app.view.Constants.NEXT_LINE_MESSAGE;
+import static com.watch.shop.app.view.Constants.NOT_RIGHT_CHOOSE_MESSAGE;
+import static com.watch.shop.app.view.Constants.OUTPUT_MESSAGE;
+import static com.watch.shop.app.view.Constants.TOTAL_COST_MESSAGE;
 import com.watch.shop.app.view.InputHandler;
 import com.watch.shop.app.view.WatchView;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Scanner;
 
 public class WatchController {
     private final WatchView view;
@@ -39,20 +38,18 @@ public class WatchController {
     }
 
     public void run() {
-        Scanner scanner = new Scanner(System.in);
-
         while (true) {
-            view.displayMessage(TITLE);
-            view.displayMessage(MENU);
+            view.displayMessage(NEXT_LINE_MESSAGE);
+            view.displayMessage(APPLICATION_TITLE);
+            view.displayMessage(MAIN_MENU);
 
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+            int choice = Integer.parseInt(inputHandler.nextLine());
 
-            view.displayMessage(NEXT_LINE);
+            view.displayMessage(NEXT_LINE_MESSAGE);
 
             switch (choice) {
                 case 0:
-                    view.displayMessage(OUTPUT);
+                    view.displayMessage(OUTPUT_MESSAGE);
                     return;
                 case 1:
                     view.showWatchCollection(service.getAllWatches());
@@ -73,7 +70,7 @@ public class WatchController {
                     addNewWatch();
                     break;
                 default:
-                    view.displayMessage(NOT_RIGHT_CHOOSE);
+                    view.displayMessage(NOT_RIGHT_CHOOSE_MESSAGE);
             }
         }
     }
@@ -94,27 +91,27 @@ public class WatchController {
     }
 
     private void displayTotalCost() {
-        System.out.println(TOTAL_COST + service.getTotalCost());
+        System.out.println(TOTAL_COST_MESSAGE + service.getTotalCost());
     }
 
     private void addNewWatch() {
-        view.displayMessage(ENTER_BRAND);
-        String brandName = (String) inputHandler.inputData();
+        view.displayMessage(ENTER_BRAND_MESSAGE);
+        String brandName = inputHandler.inputData(String.class);
 
-        view.displayMessage(ENTER_PRICE);
-        BigDecimal price = (BigDecimal) inputHandler.inputData();
+        view.displayMessage(ENTER_PRICE_MESSAGE);
+        BigDecimal price = inputHandler.inputData(BigDecimal.class);
 
-        view.displayMessage(ENTER_COLOR);
-        String colorName = (String) inputHandler.inputData();
+        view.displayMessage(ENTER_COLOR_MESSAGE);
+        String colorName = inputHandler.inputData(String.class);
 
-        view.displayMessage(ENTER_MECHANISM);
-        String mechanismName = (String) inputHandler.inputData();
+        view.displayMessage(ENTER_MECHANISM_MESSAGE);
+        String mechanismName = inputHandler.inputData(String.class);
 
-        view.displayMessage(ENTER_TYPE);
-        String typeName = (String) inputHandler.inputData();
+        view.displayMessage(ENTER_TYPE_MESSAGE);
+        String typeName = inputHandler.inputData(String.class);
 
-        view.displayMessage(ENTER_DATE);
-        LocalDate arrivalDate = (LocalDate) inputHandler.inputData();
+        view.displayMessage(ENTER_DATE_MESSAGE);
+        LocalDate arrivalDate = inputHandler.inputData(LocalDate.class);
 
         view.displayMessage(ADDING_WATCH_MESSAGE);
 
