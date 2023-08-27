@@ -1,31 +1,35 @@
 package com.watch.shop.app.model.repository;
 
-import com.watch.shop.app.model.service.WatchService;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class TestDataGenerator {
-    private final WatchService watchService;
+    public List<Watch> getInitializedWatches() {
+        List<Watch> watchList = new ArrayList<>();
 
-    public TestDataGenerator(WatchService watchService) {
-        this.watchService = watchService;
-    }
+        Watch watch1 = new Watch.Builder()
+                .brand(Brand.ARMANI)
+                .price( new BigDecimal(150.0))
+                .color( Color.BLACK)
+                .mechanism(Mechanism.MECHANICAL)
+                .type(Type.WRIST)
+                .arrivalDate(LocalDate.now())
+                .build();
 
-    public void initializeWatches() {
-        watchService.addNewWatch(Brand.ARMANI, new BigDecimal(150.0), Color.BLACK, Mechanism.MECHANICAL,
-                Type.WRIST, LocalDate.now());
+        Watch watch2 = new Watch.Builder()
+                .brand(Brand.CASIO)
+                .price( new BigDecimal(200.0))
+                .color(Color.METAL_BLUE)
+                .mechanism(Mechanism.KINETIC)
+                .type(Type.WRIST)
+                .arrivalDate(LocalDate.now())
+                .build();
 
-        watchService.addNewWatch(Brand.CARNIVAL, new BigDecimal(100.0), Color.WHITE, Mechanism.QUARTZ,
-                Type.WALL, LocalDate.now());
+        Collections.addAll(watchList, watch1, watch2);
 
-        watchService.addNewWatch(Brand.CASIO, new BigDecimal(200.0), Color.SILVER, Mechanism.KINETIC,
-                Type.WRIST, LocalDate.now());
-
-        watchService.addNewWatch(Brand.DW, new BigDecimal(250.0), Color.METAL_BLUE, Mechanism.CHRONOGRAPH,
-                Type.DESKTOP, LocalDate.now());
-
-        watchService.addNewWatch(Brand.ROLEX, new BigDecimal(300.0), Color.GOLD, Mechanism.MECHANICAL,
-                Type.WRIST, LocalDate.now());
+        return watchList;
     }
 }

@@ -23,4 +23,5 @@ public class Constants {
             + "\n Choose an action: ";
     public static final String OUTPUT = "Output from program...";
     public static final String NOT_RIGHT_CHOOSE = "Not right choose. try again.";
+    public static final String NEXT_LINE = "";
 }

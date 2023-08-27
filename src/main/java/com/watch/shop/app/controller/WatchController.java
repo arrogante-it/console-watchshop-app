@@ -3,7 +3,6 @@ package com.watch.shop.app.controller;
 import com.watch.shop.app.model.repository.Brand;
 import com.watch.shop.app.model.repository.Color;
 import com.watch.shop.app.model.repository.Mechanism;
-import com.watch.shop.app.model.repository.TestDataGenerator;
 import com.watch.shop.app.model.repository.Type;
 import com.watch.shop.app.model.service.WatchService;
 import static com.watch.shop.app.view.Constants.ADDED_WATCH_MESSAGE;
@@ -15,6 +14,7 @@ import static com.watch.shop.app.view.Constants.ENTER_MECHANISM;
 import static com.watch.shop.app.view.Constants.ENTER_PRICE;
 import static com.watch.shop.app.view.Constants.ENTER_TYPE;
 import static com.watch.shop.app.view.Constants.MENU;
+import static com.watch.shop.app.view.Constants.NEXT_LINE;
 import static com.watch.shop.app.view.Constants.NOT_RIGHT_CHOOSE;
 import static com.watch.shop.app.view.Constants.OUTPUT;
 import static com.watch.shop.app.view.Constants.TITLE;
@@ -29,21 +29,17 @@ import java.util.Scanner;
 public class WatchController {
     private final WatchView view;
     private final WatchService service;
-    private final TestDataGenerator dataGenerator;
     private final InputHandler inputHandler;
 
-    public WatchController(WatchView view, WatchService service, TestDataGenerator dataGenerator,
+    public WatchController(WatchView view, WatchService service,
                            InputHandler inputHandler) {
         this.view = view;
         this.service = service;
-        this.dataGenerator = dataGenerator;
         this.inputHandler = inputHandler;
     }
 
     public void run() {
         Scanner scanner = new Scanner(System.in);
-
-        dataGenerator.initializeWatches();
 
         while (true) {
             view.displayMessage(TITLE);
@@ -52,7 +48,7 @@ public class WatchController {
             int choice = scanner.nextInt();
             scanner.nextLine();
 
-            System.out.print('\n');
+            view.displayMessage(NEXT_LINE);
 
             switch (choice) {
                 case 0:
