@@ -31,11 +31,7 @@ public class WatchServiceImpl implements WatchService {
                 .arrivalDate(arrivalDate)
                 .build();
 
-        List<Watch> updatedWatches = new ArrayList<>(watches);
-        updatedWatches.add(watch);
-
-        watches.clear();
-        watches.addAll(updatedWatches);
+        watches.add(watch);
     }
 
     @Override
@@ -44,30 +40,24 @@ public class WatchServiceImpl implements WatchService {
     }
 
     @Override
-    public void sortByPrice() {
-        List<Watch> sortedWatches = new ArrayList<>(watches);
-        sortedWatches.sort(Comparator.comparing(Watch::getPrice));
-
-        watches.clear();
-        watches.addAll(sortedWatches);
+    public List<Watch> sortByPrice() {
+        List<Watch> copy = new ArrayList<>(watches);
+        copy.sort(Comparator.comparing(Watch::getPrice));
+        return copy;
     }
 
     @Override
-    public void sortByColor() {
-        List<Watch> sortedWatches = new ArrayList<>(watches);
-        sortedWatches.sort(Comparator.comparing(Watch::getColor));
-
-        watches.clear();
-        watches.addAll(sortedWatches);
+    public List<Watch>  sortByColor() {
+        List<Watch> copy = new ArrayList<>(watches);
+        copy.sort(Comparator.comparing(Watch::getColor));
+        return copy;
     }
 
     @Override
-    public void sortByArrivalDate() {
-        List<Watch> sortedWatches = new ArrayList<>(watches);
-        sortedWatches.sort(Comparator.comparing(Watch::getArrivalDate));
-
-        watches.clear();
-        watches.addAll(sortedWatches);
+    public List<Watch>  sortByArrivalDate() {
+        List<Watch> copy = new ArrayList<>(watches);
+        copy.sort(Comparator.comparing(Watch::getArrivalDate));
+        return copy;
     }
 
     @Override

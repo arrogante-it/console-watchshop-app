@@ -16,7 +16,6 @@ public class WatchView {
         }
 
         displayMessage(AVAILABLE_WATCHES_MESSAGE);
-
         watchList.forEach(watch -> displayMessage(NEXT_LINE_MESSAGE + watch.toString()));
     }
 

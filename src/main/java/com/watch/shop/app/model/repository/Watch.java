@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Watch {
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
     private Brand brand;
     private BigDecimal price;
     private Color color;
@@ -12,19 +14,6 @@ public class Watch {
     private Mechanism mechanism;
     private Type type;
     private LocalDate arrivalDate;
-
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-
-    @Override
-    public String toString() {
-        return String.format("Brand: %-15s | Price: $%-10s | Color: %-10s | Mechanism: %-15s | Type: %-10s | Arrival Date: %s",
-                brand,
-                price,
-                color,
-                mechanism,
-                type,
-                FORMATTER.format(arrivalDate));
-    }
 
     public static class Builder {
         private Brand brand;
@@ -87,55 +76,38 @@ public class Watch {
         return brand;
     }
 
-    public void setBrand(Brand brand) {
-        this.brand = brand;
-    }
-
     public BigDecimal getPrice() {
         return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
     }
 
     public Color getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
     public String getModel() {
         return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
     }
 
     public Mechanism getMechanism() {
         return mechanism;
     }
 
-    public void setMechanism(Mechanism mechanism) {
-        this.mechanism = mechanism;
-    }
-
     public Type getType() {
         return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
     }
 
     public LocalDate getArrivalDate() {
         return arrivalDate;
     }
 
-    public void setArrivalDate(LocalDate arrivalDate) {
-        this.arrivalDate = arrivalDate;
+    @Override
+    public String toString() {
+        return String.format("Brand: %-15s | Price: $%-10s | Color: %-10s | Mechanism: %-15s | Type: %-10s | Arrival Date: %s",
+                brand,
+                price,
+                color,
+                mechanism,
+                type,
+                FORMATTER.format(arrivalDate));
     }
 }

@@ -20,6 +20,7 @@ import static com.watch.shop.app.view.Constants.NOT_RIGHT_CHOOSE_MESSAGE;
 import static com.watch.shop.app.view.Constants.OUTPUT_MESSAGE;
 import static com.watch.shop.app.view.Constants.TOTAL_COST_MESSAGE;
 import com.watch.shop.app.view.InputHandler;
+import com.watch.shop.app.view.InputUtils;
 import com.watch.shop.app.view.WatchView;
 
 import java.math.BigDecimal;
@@ -43,7 +44,7 @@ public class WatchController {
             view.displayMessage(APPLICATION_TITLE);
             view.displayMessage(MAIN_MENU);
 
-            int choice = Integer.parseInt(inputHandler.nextLine());
+            int choice = Integer.parseInt(inputHandler.getUserInput());
 
             view.displayMessage(NEXT_LINE_MESSAGE);
 
@@ -76,42 +77,39 @@ public class WatchController {
     }
 
     private void displaySortByPrice() {
-        service.sortByPrice();
-        view.showWatchCollection(service.getAllWatches());
+        view.showWatchCollection(service.sortByPrice());
     }
 
     private void displaySortByColor() {
-        service.sortByColor();
-        view.showWatchCollection(service.getAllWatches());
+        view.showWatchCollection(service.sortByColor());
     }
 
     private void displaySortByArrivalDate() {
-        service.sortByArrivalDate();
-        view.showWatchCollection(service.getAllWatches());
+        view.showWatchCollection(service.sortByArrivalDate());
     }
 
     private void displayTotalCost() {
-        System.out.println(TOTAL_COST_MESSAGE + service.getTotalCost());
+        view.displayMessage(TOTAL_COST_MESSAGE + service.getTotalCost());
     }
 
     private void addNewWatch() {
         view.displayMessage(ENTER_BRAND_MESSAGE);
-        String brandName = inputHandler.inputData(String.class);
+        String brandName = inputHandler.getUserInput();
 
         view.displayMessage(ENTER_PRICE_MESSAGE);
-        BigDecimal price = inputHandler.inputData(BigDecimal.class);
+        BigDecimal price = InputUtils.parseToBigDecimal(inputHandler.getUserInput());
 
         view.displayMessage(ENTER_COLOR_MESSAGE);
-        String colorName = inputHandler.inputData(String.class);
+        String colorName = inputHandler.getUserInput();
 
         view.displayMessage(ENTER_MECHANISM_MESSAGE);
-        String mechanismName = inputHandler.inputData(String.class);
+        String mechanismName = inputHandler.getUserInput();
 
         view.displayMessage(ENTER_TYPE_MESSAGE);
-        String typeName = inputHandler.inputData(String.class);
+        String typeName = inputHandler.getUserInput();
 
         view.displayMessage(ENTER_DATE_MESSAGE);
-        LocalDate arrivalDate = inputHandler.inputData(LocalDate.class);
+        LocalDate arrivalDate = InputUtils.parseToLocalDate(inputHandler.getUserInput());
 
         view.displayMessage(ADDING_WATCH_MESSAGE);
 
