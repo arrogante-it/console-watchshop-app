@@ -7,13 +7,23 @@ import java.time.format.DateTimeFormatter;
 public class Watch {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
-    private Brand brand;
-    private BigDecimal price;
-    private Color color;
-    private String model;
-    private Mechanism mechanism;
-    private Type type;
-    private LocalDate arrivalDate;
+    private final Brand brand;
+    private final BigDecimal price;
+    private final Color color;
+    private final String model;
+    private final Mechanism mechanism;
+    private final Type type;
+    private final LocalDate arrivalDate;
+
+    private Watch(Builder builder) {
+        this.brand = builder.brand;
+        this.price = builder.price;
+        this.color = builder.color;
+        this.model = builder.model;
+        this.mechanism = builder.mechanism;
+        this.type = builder.type;
+        this.arrivalDate = builder.arrivalDate;
+    }
 
     public static class Builder {
         private Brand brand;
@@ -60,15 +70,7 @@ public class Watch {
         }
 
         public Watch build() {
-            Watch watch = new Watch();
-            watch.brand = this.brand;
-            watch.price = this.price;
-            watch.color = this.color;
-            watch.model = this.model;
-            watch.mechanism = this.mechanism;
-            watch.type = this.type;
-            watch.arrivalDate = this.arrivalDate;
-            return watch;
+            return new Watch(this);
         }
     }
 
