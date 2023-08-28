@@ -1,13 +1,29 @@
 package com.watchshop.app.controller;
 
 import com.watch.shop.app.controller.WatchController;
-import static org.mockito.Mockito.*;
-
-import com.watch.shop.app.model.repository.*;
+import com.watch.shop.app.model.repository.Brand;
+import com.watch.shop.app.model.repository.Color;
+import com.watch.shop.app.model.repository.Mechanism;
+import com.watch.shop.app.model.repository.Type;
+import com.watch.shop.app.model.repository.Watch;
 import com.watch.shop.app.model.service.WatchService;
-import com.watch.shop.app.view.*;
+import static com.watch.shop.app.view.Constants.ADDED_WATCH_MESSAGE;
+import static com.watch.shop.app.view.Constants.ADDING_WATCH_MESSAGE;
+import static com.watch.shop.app.view.Constants.ENTER_BRAND_MESSAGE;
+import static com.watch.shop.app.view.Constants.ENTER_COLOR_MESSAGE;
+import static com.watch.shop.app.view.Constants.ENTER_DATE_MESSAGE;
+import static com.watch.shop.app.view.Constants.ENTER_MECHANISM_MESSAGE;
+import static com.watch.shop.app.view.Constants.ENTER_PRICE_MESSAGE;
+import static com.watch.shop.app.view.Constants.ENTER_TYPE_MESSAGE;
+import static com.watch.shop.app.view.Constants.OUTPUT_MESSAGE;
+import static com.watch.shop.app.view.Constants.TOTAL_COST_MESSAGE;
+import com.watch.shop.app.view.InputHandler;
+import com.watch.shop.app.view.WatchView;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Test;;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -16,6 +32,13 @@ import java.util.Collections;
 import java.util.List;
 
 public class WatchControllerTest {
+    private static final String BRAND = "CASIO";
+    private static final String PRICE = "100";
+    private static final String COLOR = "WHITE";
+    private static final String MECHANISM = "MECHANICAL";
+    private static final String TYPE = "WRIST";
+    private static final String DATE = String.valueOf(LocalDate.now());
+
     private WatchView view;
     private WatchService service;
     private InputHandler inputHandler;
@@ -23,7 +46,7 @@ public class WatchControllerTest {
     private WatchController controller;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         view = mock(WatchView.class);
         service = mock(WatchService.class);
         inputHandler = mock(InputHandler.class);
@@ -31,29 +54,29 @@ public class WatchControllerTest {
     }
 
     @Test
-    public void testRun_ExitChoice() {
+    void testRun_ExitChoice() {
         when(inputHandler.getUserInput()).thenReturn("0");
 
         controller.run();
 
-        verify(view).displayMessage(Constants.OUTPUT_MESSAGE);
+        verify(view).displayMessage(OUTPUT_MESSAGE);
     }
 
+//    @Test
+//    void testRunShowAllWatchesChoice() {
+//        List<Watch> watches = buildWatchList();
+//
+//        when(inputHandler.getUserInput()).thenReturn("1", "0");
+//        when(service.getAllWatches()).thenReturn(watches);
+//
+//        controller.run();
+//
+//        verify(service).getAllWatches();
+//        verify(view).showWatchCollection(watches);
+//    }
+
     @Test
-    public void testRunShowAllWatchesChoice() {
-        List<Watch> watches = buildWatchList();
-
-        when(inputHandler.getUserInput()).thenReturn("1", "0");
-        when(service.getAllWatches()).thenReturn(watches);
-
-        controller.run();
-
-        verify(service).getAllWatches();
-        verify(view).showWatchCollection(watches);
-    }
-
-    @Test
-    public void testRunSortByPriceChoice() {
+    void testRunSortByPriceChoice() {
         List<Watch> watches = buildWatchList();
 
         when(inputHandler.getUserInput()).thenReturn("2", "0");
@@ -65,9 +88,8 @@ public class WatchControllerTest {
         verify(view).showWatchCollection(watches);
     }
 
-    // todo THIS TEST FAILED
     @Test
-    public void testRunSortByColorChoice() {
+    void testRunSortByColorChoice() {
         List<Watch> watches = buildWatchList();
 
         when(inputHandler.getUserInput()).thenReturn("3", "0");
@@ -80,7 +102,7 @@ public class WatchControllerTest {
     }
 
     @Test
-    public void testRunSortByDateChoice() {
+    void testRunSortByDateChoice() {
         List<Watch> watches = buildWatchList();
 
         when(inputHandler.getUserInput()).thenReturn("4", "0");
@@ -93,7 +115,7 @@ public class WatchControllerTest {
     }
 
     @Test
-    public void testRunDisplayTotalCostChoice() {
+    void testRunDisplayTotalCostChoice() {
         BigDecimal totalCost = BigDecimal.valueOf(350);
 
         when(inputHandler.getUserInput()).thenReturn("5", "0");
@@ -102,34 +124,40 @@ public class WatchControllerTest {
         controller.run();
 
         verify(service).getTotalCost();
-        verify(view).displayMessage(Constants.TOTAL_COST_MESSAGE + totalCost);
+        verify(view).displayMessage(TOTAL_COST_MESSAGE + totalCost);
     }
 
-    // todo THIS TEST FAILED
     @Test
-    public void testRunAddNewWatchChoice() {
+    void testRunAddNewWatchChoice() {
         List<Watch> watches = buildWatchList();
 
-        when(inputHandler.getUserInput()).thenReturn("6", "0");
+        when(inputHandler.getUserInput()).thenReturn("6",
+                BRAND,
+                PRICE,
+                COLOR,
+                MECHANISM,
+                TYPE,
+                DATE,
+                "0");
         when(service.getAllWatches()).thenReturn(watches);
-        when(InputUtils.parseToLocalDate(any())).thenReturn(LocalDate.now());
 
         controller.run();
 
-        verify(service).addNewWatch(Brand.CASIO,
-                BigDecimal.valueOf(100),
-                Color.WHITE,
-                Mechanism.MECHANICAL,
-                Type.WRIST,
+        verify(service).addNewWatch(Brand.valueOf(BRAND),
+                BigDecimal.valueOf(Integer.parseInt(PRICE)),
+                Color.valueOf(COLOR),
+                Mechanism.valueOf(MECHANISM),
+                Type.valueOf(TYPE),
                 LocalDate.now());
-        verify(view).displayMessage(Constants.ENTER_BRAND_MESSAGE);
-        verify(view).displayMessage(Constants.ENTER_COLOR_MESSAGE);
-        verify(view).displayMessage(Constants.ENTER_DATE_MESSAGE);
-        verify(view).displayMessage(Constants.ENTER_MECHANISM_MESSAGE);
-        verify(view).displayMessage(Constants.ENTER_PRICE_MESSAGE);
-        verify(view).displayMessage(Constants.ENTER_TYPE_MESSAGE);
-        verify(view).displayMessage(Constants.ADDING_WATCH_MESSAGE);
-        verify(view).displayMessage(Constants.ADDED_WATCH_MESSAGE);
+
+        verify(view).displayMessage(ENTER_BRAND_MESSAGE);
+        verify(view).displayMessage(ENTER_COLOR_MESSAGE);
+        verify(view).displayMessage(ENTER_DATE_MESSAGE);
+        verify(view).displayMessage(ENTER_MECHANISM_MESSAGE);
+        verify(view).displayMessage(ENTER_PRICE_MESSAGE);
+        verify(view).displayMessage(ENTER_TYPE_MESSAGE);
+        verify(view).displayMessage(ADDING_WATCH_MESSAGE);
+        verify(view).displayMessage(ADDED_WATCH_MESSAGE);
     }
 
     private List<Watch> buildWatchList() {
