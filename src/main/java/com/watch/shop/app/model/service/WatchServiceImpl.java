@@ -40,21 +40,21 @@ public class WatchServiceImpl implements WatchService {
     }
 
     @Override
-    public List<Watch> sortByPrice() {
+    public List<Watch> getSortedByPrice() {
         List<Watch> copy = new ArrayList<>(watches);
         copy.sort(Comparator.comparing(Watch::getPrice));
         return copy;
     }
 
     @Override
-    public List<Watch>  sortByColor() {
+    public List<Watch>  getSortedByColor() {
         List<Watch> copy = new ArrayList<>(watches);
         copy.sort(Comparator.comparing(Watch::getColor));
         return copy;
     }
 
     @Override
-    public List<Watch>  sortByArrivalDate() {
+    public List<Watch>  getSortedByArrivalDate() {
         List<Watch> copy = new ArrayList<>(watches);
         copy.sort(Comparator.comparing(Watch::getArrivalDate));
         return copy;

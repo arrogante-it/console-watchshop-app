@@ -77,15 +77,15 @@ public class WatchController {
     }
 
     private void displaySortByPrice() {
-        view.showWatchCollection(service.sortByPrice());
+        view.showWatchCollection(service.getSortedByPrice());
     }
 
     private void displaySortByColor() {
-        view.showWatchCollection(service.sortByColor());
+        view.showWatchCollection(service.getSortedByColor());
     }
 
     private void displaySortByArrivalDate() {
-        view.showWatchCollection(service.sortByArrivalDate());
+        view.showWatchCollection(service.getSortedByArrivalDate());
     }
 
     private void displayTotalCost() {

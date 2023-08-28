@@ -15,11 +15,11 @@ public interface WatchService {
 
     void addNewWatch(Brand brand, BigDecimal price, Color color, Mechanism mechanism, Type type, LocalDate arrivalDate);
 
-    List<Watch> sortByPrice();
+    List<Watch> getSortedByPrice();
 
-    List<Watch> sortByColor();
+    List<Watch> getSortedByColor();
 
-    List<Watch> sortByArrivalDate();
+    List<Watch> getSortedByArrivalDate();
 
     BigDecimal getTotalCost();
 }
