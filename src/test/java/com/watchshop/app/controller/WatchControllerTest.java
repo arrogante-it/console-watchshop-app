@@ -37,7 +37,7 @@ public class WatchControllerTest {
     private static final String COLOR = "WHITE";
     private static final String MECHANISM = "MECHANICAL";
     private static final String TYPE = "WRIST";
-    private static final String DATE = String.valueOf(LocalDate.now());
+    private static final String DATE = "29.08.2023";
 
     private WatchView view;
     private WatchService service;
@@ -62,18 +62,18 @@ public class WatchControllerTest {
         verify(view).displayMessage(OUTPUT_MESSAGE);
     }
 
-//    @Test
-//    void testRunShowAllWatchesChoice() {
-//        List<Watch> watches = buildWatchList();
-//
-//        when(inputHandler.getUserInput()).thenReturn("1", "0");
-//        when(service.getAllWatches()).thenReturn(watches);
-//
-//        controller.run();
-//
-//        verify(service).getAllWatches();
-//        verify(view).showWatchCollection(watches);
-//    }
+    @Test
+    void testRunShowAllWatchesChoice() {
+        List<Watch> watches = buildWatchList();
+
+        when(inputHandler.getUserInput()).thenReturn("1", "0");
+        when(service.getAllWatches()).thenReturn(watches);
+
+        controller.run();
+
+        verify(service).getAllWatches();
+        verify(view).showWatchCollection(watches);
+    }
 
     @Test
     void testRunSortByPriceChoice() {
@@ -139,7 +139,7 @@ public class WatchControllerTest {
                 TYPE,
                 DATE,
                 "0");
-        when(service.getAllWatches()).thenReturn(watches);
+//        when(service.getAllWatches()).thenReturn(watches);
 
         controller.run();
 
@@ -148,7 +148,7 @@ public class WatchControllerTest {
                 Color.valueOf(COLOR),
                 Mechanism.valueOf(MECHANISM),
                 Type.valueOf(TYPE),
-                LocalDate.now());
+                LocalDate.of(2023,8,29));
 
         verify(view).displayMessage(ENTER_BRAND_MESSAGE);
         verify(view).displayMessage(ENTER_COLOR_MESSAGE);
@@ -188,9 +188,6 @@ public class WatchControllerTest {
                 .brand(Brand.valueOf("DW"))
                 .build();
 
-        List<Watch> watches = new ArrayList<>();
-        Collections.addAll(watches, watch1, watch2, watch3);
-
-        return watches;
+        return List.of(watch1, watch2, watch3);
     }
 }

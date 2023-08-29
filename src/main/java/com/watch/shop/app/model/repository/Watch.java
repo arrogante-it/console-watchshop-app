@@ -3,6 +3,7 @@ package com.watch.shop.app.model.repository;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class Watch {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -103,13 +104,22 @@ public class Watch {
     }
 
     @Override
-    public int hashCode() {
-        return super.hashCode();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Watch watch = (Watch) o;
+        return brand == watch.brand &&
+                price.equals(watch.price) &&
+                color == watch.color &&
+                model.equals(watch.model) &&
+                mechanism == watch.mechanism &&
+                type == watch.type &&
+                arrivalDate.equals(watch.arrivalDate);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public int hashCode() {
+        return Objects.hash(brand, price, color, model, mechanism, type, arrivalDate);
     }
 
     @Override
