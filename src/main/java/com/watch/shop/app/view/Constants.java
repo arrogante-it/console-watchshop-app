@@ -9,7 +9,7 @@ public class Constants {
     public static final String ENTER_COLOR_MESSAGE = "Enter watch color: ";
     public static final String ENTER_MECHANISM_MESSAGE = "Enter watch mechanism: ";
     public static final String ENTER_TYPE_MESSAGE = "Enter watch type: ";
-    public static final String ENTER_DATE_MESSAGE = "Enter the date of watch receipt (in the format \"dd.MM.yyyy\"): ";
+    public static final String ENTER_DATE_MESSAGE = "Enter the date of watch receipt (in the format \"yyyy-MM-dd\"): ";
     public static final String ADDING_WATCH_MESSAGE = "Adding new watch...\n";
     public static final String ADDED_WATCH_MESSAGE = "New Watch successfully added.\n";
     public static final String APPLICATION_TITLE = "\n--- WatchShop ---";

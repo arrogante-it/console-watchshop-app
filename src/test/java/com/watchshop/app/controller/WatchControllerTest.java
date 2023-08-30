@@ -15,6 +15,7 @@ import static com.watch.shop.app.view.Constants.ENTER_DATE_MESSAGE;
 import static com.watch.shop.app.view.Constants.ENTER_MECHANISM_MESSAGE;
 import static com.watch.shop.app.view.Constants.ENTER_PRICE_MESSAGE;
 import static com.watch.shop.app.view.Constants.ENTER_TYPE_MESSAGE;
+import static com.watch.shop.app.view.Constants.NOT_RIGHT_CHOOSE_MESSAGE;
 import static com.watch.shop.app.view.Constants.OUTPUT_MESSAGE;
 import static com.watch.shop.app.view.Constants.TOTAL_COST_MESSAGE;
 import com.watch.shop.app.view.InputHandler;
@@ -27,17 +28,15 @@ import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class WatchControllerTest {
+class WatchControllerTest {
     private static final String BRAND = "CASIO";
     private static final String PRICE = "100";
     private static final String COLOR = "WHITE";
     private static final String MECHANISM = "MECHANICAL";
     private static final String TYPE = "WRIST";
-    private static final String DATE = "29.08.2023";
+    private static final String DATE = "2023-08-30";
 
     private WatchView view;
     private WatchService service;
@@ -54,7 +53,16 @@ public class WatchControllerTest {
     }
 
     @Test
-    void testRun_ExitChoice() {
+    void shouldCorrectlyDisplayNotRightChoose() {
+        when(inputHandler.getUserInput()).thenReturn("-1", "0");
+
+        controller.run();
+
+        verify(view).displayMessage(NOT_RIGHT_CHOOSE_MESSAGE);
+    }
+
+    @Test
+    void shouldCorrectlyExitApplication() {
         when(inputHandler.getUserInput()).thenReturn("0");
 
         controller.run();
@@ -63,7 +71,7 @@ public class WatchControllerTest {
     }
 
     @Test
-    void testRunShowAllWatchesChoice() {
+    void shouldCorrectlyShowAllWatches() {
         List<Watch> watches = buildWatchList();
 
         when(inputHandler.getUserInput()).thenReturn("1", "0");
@@ -76,7 +84,7 @@ public class WatchControllerTest {
     }
 
     @Test
-    void testRunSortByPriceChoice() {
+    void shouldCorrectlySortByPrice() {
         List<Watch> watches = buildWatchList();
 
         when(inputHandler.getUserInput()).thenReturn("2", "0");
@@ -89,7 +97,7 @@ public class WatchControllerTest {
     }
 
     @Test
-    void testRunSortByColorChoice() {
+    void shouldCorrectlySortByColor() {
         List<Watch> watches = buildWatchList();
 
         when(inputHandler.getUserInput()).thenReturn("3", "0");
@@ -102,7 +110,7 @@ public class WatchControllerTest {
     }
 
     @Test
-    void testRunSortByDateChoice() {
+    void shouldCorrectlySortByDate() {
         List<Watch> watches = buildWatchList();
 
         when(inputHandler.getUserInput()).thenReturn("4", "0");
@@ -115,7 +123,7 @@ public class WatchControllerTest {
     }
 
     @Test
-    void testRunDisplayTotalCostChoice() {
+    void shouldCorrectlyDisplayTotalCost() {
         BigDecimal totalCost = BigDecimal.valueOf(350);
 
         when(inputHandler.getUserInput()).thenReturn("5", "0");
@@ -128,9 +136,7 @@ public class WatchControllerTest {
     }
 
     @Test
-    void testRunAddNewWatchChoice() {
-        List<Watch> watches = buildWatchList();
-
+    void shouldCorrectlyAddNewWatch() {
         when(inputHandler.getUserInput()).thenReturn("6",
                 BRAND,
                 PRICE,
@@ -139,7 +145,6 @@ public class WatchControllerTest {
                 TYPE,
                 DATE,
                 "0");
-//        when(service.getAllWatches()).thenReturn(watches);
 
         controller.run();
 
@@ -148,7 +153,7 @@ public class WatchControllerTest {
                 Color.valueOf(COLOR),
                 Mechanism.valueOf(MECHANISM),
                 Type.valueOf(TYPE),
-                LocalDate.of(2023,8,29));
+                LocalDate.of(2023, 8, 30));
 
         verify(view).displayMessage(ENTER_BRAND_MESSAGE);
         verify(view).displayMessage(ENTER_COLOR_MESSAGE);

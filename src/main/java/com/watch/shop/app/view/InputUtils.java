@@ -3,7 +3,6 @@ package com.watch.shop.app.view;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class InputUtils {
     public static BigDecimal parseToBigDecimal(String value) {
@@ -11,7 +10,7 @@ public class InputUtils {
     }
 
     public static LocalDate parseToLocalDate(String value) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         return LocalDate.parse(value, formatter);
     }
