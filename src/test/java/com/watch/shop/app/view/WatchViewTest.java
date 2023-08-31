@@ -11,9 +11,6 @@ import static com.watch.shop.app.view.Constants.NO_AVAILABLE_WATCHES_MESSAGE;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -39,8 +36,9 @@ class WatchViewTest {
         System.setOut(new PrintStream(outputStream));
 
         watchView.showWatchCollection(watches);
+        String actual = outputStream.toString();
 
-        assertEquals(NO_AVAILABLE_WATCHES_MESSAGE, outputStream.toString());
+        assertEquals(NO_AVAILABLE_WATCHES_MESSAGE, actual);
     }
 
     @Test
@@ -51,31 +49,31 @@ class WatchViewTest {
         String watch2 = watches.get(1).toString();
         String watch3 = watches.get(2).toString();
 
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-
-        watchView.showWatchCollection(watches);
-
-        String actual = outputStream.toString();
         String expected = AVAILABLE_WATCHES_MESSAGE +
                 NEXT_LINE_MESSAGE +
                 watch1 +
                 NEXT_LINE_MESSAGE +
-                watch2  +
+                watch2 +
                 NEXT_LINE_MESSAGE +
                 watch3;
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        watchView.showWatchCollection(watches);
+        String actual = outputStream.toString();
+
         assertEquals(expected, actual);
     }
 
     @Test
     void shouldCorrectlyDisplayMessage() {
+        String expected = "message";
+
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
 
-        String expected = "message";
-
         watchView.displayMessage(expected);
-
         String actual = outputStream.toString();
 
         assertEquals(expected, actual);

@@ -7,19 +7,19 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 class InputUtilsTest {
+    private static final Long TEST_VALUE = 10L;
+
     @Test
     void shouldCorrectlyParseToBigDecimal() {
-        BigDecimal actual = InputUtils.parseToBigDecimal("10");
-        BigDecimal expected = BigDecimal.valueOf(10);
-
+        BigDecimal expected = BigDecimal.valueOf(TEST_VALUE);
+        BigDecimal actual = InputUtils.parseToBigDecimal(TEST_VALUE.toString());
         assertEquals(expected, actual);
     }
 
     @Test
     void shouldCorrectlyParseToLocalDate() {
-        LocalDate actual = InputUtils.parseToLocalDate("2023-08-31");
         LocalDate expected = LocalDate.of(2023, 8, 31);
-
+        LocalDate actual = InputUtils.parseToLocalDate("2023-08-31");
         assertEquals(expected, actual);
     }
 }
