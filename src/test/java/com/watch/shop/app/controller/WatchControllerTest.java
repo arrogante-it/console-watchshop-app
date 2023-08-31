@@ -1,6 +1,5 @@
-package com.watchshop.app.controller;
+package com.watch.shop.app.controller;
 
-import com.watch.shop.app.controller.WatchController;
 import com.watch.shop.app.model.repository.Brand;
 import com.watch.shop.app.model.repository.Color;
 import com.watch.shop.app.model.repository.Mechanism;
