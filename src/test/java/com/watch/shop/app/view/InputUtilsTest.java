@@ -1,25 +1,26 @@
 package com.watch.shop.app.view;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 class InputUtilsTest {
-    private static final Long TEST_VALUE = 10L;
+    private static final Long NUMBER = 10L;
+    private static final LocalDate DATE = LocalDate.of(2023, 8, 31);
 
     @Test
     void shouldCorrectlyParseToBigDecimal() {
-        BigDecimal expected = BigDecimal.valueOf(TEST_VALUE);
-        BigDecimal actual = InputUtils.parseToBigDecimal(TEST_VALUE.toString());
+        BigDecimal expected = BigDecimal.valueOf(NUMBER);
+        BigDecimal actual = InputUtils.parseToBigDecimal(NUMBER.toString());
         assertEquals(expected, actual);
     }
 
     @Test
     void shouldCorrectlyParseToLocalDate() {
-        LocalDate expected = LocalDate.of(2023, 8, 31);
-        LocalDate actual = InputUtils.parseToLocalDate("2023-08-31");
+        LocalDate expected = DATE;
+        LocalDate actual = InputUtils.parseToLocalDate(DATE.toString());
         assertEquals(expected, actual);
     }
 }
