@@ -111,7 +111,6 @@ public class Watch {
         return brand == watch.brand &&
                 price.equals(watch.price) &&
                 color == watch.color &&
-                model.equals(watch.model) &&
                 mechanism == watch.mechanism &&
                 type == watch.type &&
                 arrivalDate.equals(watch.arrivalDate);
@@ -119,7 +118,7 @@ public class Watch {
 
     @Override
     public int hashCode() {
-        return Objects.hash(brand, price, color, model, mechanism, type, arrivalDate);
+        return Objects.hash(brand, price, color, mechanism, type, arrivalDate);
     }
 
     @Override

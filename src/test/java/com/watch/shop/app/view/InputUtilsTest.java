@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 class InputUtilsTest {
     private static final Long NUMBER = 10L;
-    private static final LocalDate DATE = LocalDate.of(2023, 8, 31);
+    private static final LocalDate DATE = LocalDate.parse("2023-08-31");
 
     @Test
     void shouldCorrectlyParseToBigDecimal() {
