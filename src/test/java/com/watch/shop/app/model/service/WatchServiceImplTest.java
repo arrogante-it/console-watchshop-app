@@ -7,41 +7,48 @@ import com.watch.shop.app.model.repository.TestDataGenerator;
 import com.watch.shop.app.model.repository.Type;
 import com.watch.shop.app.model.repository.Watch;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
-import java.io.IOException;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 class WatchServiceImplTest {
-    private static final Watch WATCH = new Watch.Builder().build(); // add watch here
-
     private WatchService service;
 
     @BeforeEach
-    void setUp () {
+    void setUp() {
         service = new WatchServiceImpl();
     }
 
-//    @Test
-//    void addNewWatch() {
-//    }
+    @Test
+    void addNewWatch() {
+        int initialSize = service.getAllWatches().size();
 
-//    @Test
-//    void getAllWatches() {
-//        //List<Watch> watches = buildWatchList();
-//
-//        service.getAllWatches();
-//    }
+        service.addNewWatch(Brand.valueOf("CASIO"),
+                BigDecimal.valueOf(100),
+                Color.valueOf("WHITE"),
+                Mechanism.valueOf("MECHANICAL"),
+                Type.valueOf("WRIST"),
+                LocalDate.parse("2023-09-02")
+        );
+
+        int newSize = service.getAllWatches().size();
+
+        assertEquals(initialSize + 1, newSize);
+    }
+
+    @Test
+    void getAllWatches() {
+        List<Watch> expectedList = new TestDataGenerator().getInitializedWatches();
+
+        List<Watch> actualList = service.getAllWatches();
+
+        assertEquals(expectedList, actualList);
+    }
 
     @Test
     void getSortedByPrice() throws NoSuchFieldException, IllegalAccessException {
@@ -94,38 +101,17 @@ class WatchServiceImplTest {
         assertEquals(expected, actual);
     }
 
-//    @Test
-//    void getTotalCost() {
-//    }
+    @Test
+    void getTotalCost() {
+        List<Watch> watches = new TestDataGenerator().getInitializedWatches();
 
-    private List<Watch> buildWatchList() {
-        Watch watch1 = new Watch.Builder()
-                .arrivalDate(LocalDate.of(2000, 2, 2))
-                .type(Type.valueOf("WRIST"))
-                .mechanism(Mechanism.valueOf("MECHANICAL"))
-                .price(BigDecimal.valueOf(100))
-                .color(Color.valueOf("WHITE"))
-                .brand(Brand.valueOf("CASIO"))
-                .build();
+        BigDecimal expected = watches
+                .stream()
+                .map(Watch::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        Watch watch2 = new Watch.Builder()
-                .arrivalDate(LocalDate.of(1999, 1, 1))
-                .type(Type.valueOf("DESKTOP"))
-                .mechanism(Mechanism.valueOf("KINETIC"))
-                .price(BigDecimal.valueOf(200))
-                .color(Color.valueOf("BLACK"))
-                .brand(Brand.valueOf("ARMANI"))
-                .build();
+        BigDecimal actual = service.getTotalCost();
 
-        Watch watch3 = new Watch.Builder()
-                .arrivalDate(LocalDate.of(2023, 3, 3))
-                .type(Type.valueOf("WALL"))
-                .mechanism(Mechanism.valueOf("QUARTZ"))
-                .price(BigDecimal.valueOf(50))
-                .color(Color.valueOf("BLACK"))
-                .brand(Brand.valueOf("DW"))
-                .build();
-
-        return List.of(watch1, watch2, watch3);
+        assertEquals(expected, actual);
     }
 }

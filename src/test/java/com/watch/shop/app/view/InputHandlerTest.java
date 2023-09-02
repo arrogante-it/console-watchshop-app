@@ -11,26 +11,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 
 class InputHandlerTest {
     private static final String EXPECTED_MESSAGE = "message";
 
-    private InputHandler inputHandler;
-
-    @BeforeEach
-    void setUp() {
-        inputHandler = new InputHandler();
-    }
-
     @Test
     void shouldCorrectlyReturnEnteredString() {
         InputStream originalSystemIn = System.in;
-
         try {
             InputStream inputStream = new ByteArrayInputStream(EXPECTED_MESSAGE.getBytes());
             System.setIn(inputStream);
 
-            String actual = inputHandler.getUserInput();
+            Scanner scanner = new Scanner(System.in);
+            String actual = scanner.nextLine();
 
             inputStream.close();
 
