@@ -41,10 +41,19 @@ class WatchServiceImplTest {
 
         setFiled(watches);
 
+        Watch watch = new Watch.Builder()
+                .brand(BRAND)
+                .price(PRICE)
+                .color(COLOR)
+                .mechanism(MECHANISM)
+                .type(TYPE)
+                .arrivalDate(DATE)
+                .build();
+
         service.addNewWatch(BRAND, PRICE, COLOR, MECHANISM, TYPE, DATE);
 
         assertEquals(1, watches.size());
-        //assertEquals(watches, watches.iterator().next());
+        assertEquals(watch, watches.iterator().next());
     }
 
     @Test

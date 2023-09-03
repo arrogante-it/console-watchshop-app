@@ -10,14 +10,8 @@ import java.io.InputStream;
 
 class InputHandlerTest {
     private static final String EXPECTED_MESSAGE = "message";
-    private static final String EXCEPTION_MESSAGE = "stream not closed";
 
     private InputHandler inputHandler;
-
-    @BeforeEach
-    void setUp() {
-        inputHandler = new InputHandler();
-    }
 
     @Test
     void shouldCorrectlyReturnEnteredString() {
@@ -26,6 +20,8 @@ class InputHandlerTest {
         try {
             InputStream inputStream = new ByteArrayInputStream(EXPECTED_MESSAGE.getBytes());
             System.setIn(inputStream);
+
+            inputHandler = new InputHandler();
 
             String actual = inputHandler.getUserInput();
 
