@@ -5,7 +5,6 @@ import com.watch.shop.app.model.repository.Color;
 import com.watch.shop.app.model.repository.Mechanism;
 import com.watch.shop.app.model.repository.Type;
 import com.watch.shop.app.model.repository.Watch;
-import static java.util.Collections.emptyList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeEach;
