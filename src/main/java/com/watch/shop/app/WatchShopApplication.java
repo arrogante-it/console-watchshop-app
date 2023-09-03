@@ -7,10 +7,10 @@ import com.watch.shop.app.view.InputHandler;
 import com.watch.shop.app.view.WatchView;
 
 public class WatchShopApplication {
-    public static void main(String[] args) {
+        public static void main(String[] args) {
         WatchView view = new WatchView();
         WatchService service = new WatchServiceImpl();
-        InputHandler inputHandler = new InputHandler();
+        InputHandler inputHandler = new InputHandler(System.in);
 
         WatchController controller = new WatchController(view, service, inputHandler);
 

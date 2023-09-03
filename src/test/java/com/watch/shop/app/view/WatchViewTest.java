@@ -9,7 +9,7 @@ import static com.watch.shop.app.view.Constants.AVAILABLE_WATCHES_MESSAGE;
 import static com.watch.shop.app.view.Constants.NEXT_LINE_MESSAGE;
 import static com.watch.shop.app.view.Constants.NO_AVAILABLE_WATCHES_MESSAGE;
 import static java.util.Collections.emptyList;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +21,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 class WatchViewTest {
-    private final String MESSAGE = "message";
+    private static final String MESSAGE = "message";
 
     private WatchView watchView;
 
