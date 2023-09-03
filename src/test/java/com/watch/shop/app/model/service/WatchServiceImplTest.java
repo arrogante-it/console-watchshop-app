@@ -39,7 +39,7 @@ class WatchServiceImplTest {
     void shouldCorrectlyAddNewWatch() {
         List<Watch> watches = new ArrayList<>();
 
-        setFiled(watches);
+        setWatchesFiled(watches);
 
         Watch watch = new Watch.Builder()
                 .brand(BRAND)
@@ -60,7 +60,7 @@ class WatchServiceImplTest {
     void shouldCorrectlyGetAllWatches() {
         List<Watch> expectedList = buildWatchList();
 
-        setFiled(buildWatchList());
+        setWatchesFiled(buildWatchList());
 
         List<Watch> actualList = service.getAllWatches();
 
@@ -160,7 +160,7 @@ class WatchServiceImplTest {
         return List.of(watch1, watch2, watch3);
     }
 
-    private void setFiled(List<Watch> watches) {
+    private void setWatchesFiled(List<Watch> watches) {
         try {
             Field watchesField = WatchServiceImpl.class.getDeclaredField(LIST_NAME);
             watchesField.setAccessible(true);
