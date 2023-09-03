@@ -21,6 +21,13 @@ import java.util.List;
 class WatchServiceImplTest {
     private static final String LIST_NAME = "watches";
 
+    private static final Brand BRAND = Brand.DW;
+    private static final BigDecimal PRICE = BigDecimal.valueOf(322);
+    private static final Color COLOR = Color.GOLD;
+    private static final Mechanism MECHANISM = Mechanism.QUARTZ;
+    private static final Type TYPE = Type.WRIST;
+    private static final LocalDate DATE = LocalDate.parse("2023-09-03");
+
     private WatchService service;
 
     @BeforeEach
@@ -30,24 +37,21 @@ class WatchServiceImplTest {
 
     @Test
     void shouldCorrectlyAddNewWatch() {
-        int initialSize = getWatchesListSize(service);
+        List<Watch> watches = new ArrayList<>();
 
-        service.addNewWatch(Brand.CASIO,
-                BigDecimal.valueOf(100),
-                Color.WHITE,
-                Mechanism.MECHANICAL,
-                Type.WRIST,
-                LocalDate.parse("2023-09-02")
-        );
+        setFiled(watches);
 
-        int newSize = getWatchesListSize(service);
+        service.addNewWatch(BRAND, PRICE, COLOR, MECHANISM, TYPE, DATE);
 
-        assertEquals(initialSize + 1, newSize);
+        assertEquals(1, watches.size());
+        //assertEquals(watches, watches.iterator().next());
     }
 
     @Test
     void shouldCorrectlyGetAllWatches() {
         List<Watch> expectedList = buildWatchList();
+
+        setFiled(buildWatchList());
 
         List<Watch> actualList = service.getAllWatches();
 
@@ -56,15 +60,14 @@ class WatchServiceImplTest {
 
     @Test
     void shouldCorrectlyGetSortedByPrice() throws NoSuchFieldException, IllegalAccessException {
-        List<Watch> expected = new ArrayList<>(buildWatchList());
+        List<Watch> watches = buildWatchList();
+
+        List<Watch> expected = new ArrayList<>(watches);
         expected.sort(Comparator.comparing(Watch::getPrice));
 
         Field watchesField = WatchServiceImpl.class.getDeclaredField(LIST_NAME);
         watchesField.setAccessible(true);
-
-        List<Watch> watchesToAdd = buildWatchList();
-
-        watchesField.set(service, watchesToAdd);
+        watchesField.set(service, watches);
 
         List<Watch> actual = service.getSortedByPrice();
 
@@ -73,15 +76,14 @@ class WatchServiceImplTest {
 
     @Test
     void shouldCorrectlyGetSortedByColor() throws NoSuchFieldException, IllegalAccessException {
+        List<Watch> watches = buildWatchList();
+
         List<Watch> expected = new ArrayList<>(buildWatchList());
         expected.sort(Comparator.comparing(Watch::getColor));
 
         Field watchesField = WatchServiceImpl.class.getDeclaredField(LIST_NAME);
         watchesField.setAccessible(true);
-
-        List<Watch> watchesToAdd = buildWatchList();
-
-        watchesField.set(service, watchesToAdd);
+        watchesField.set(service, watches);
 
         List<Watch> actual = service.getSortedByColor();
 
@@ -90,15 +92,14 @@ class WatchServiceImplTest {
 
     @Test
     void shouldCorrectlyGetSortedByArrivalDate() throws NoSuchFieldException, IllegalAccessException {
+        List<Watch> watches = buildWatchList();
+
         List<Watch> expected = new ArrayList<>(buildWatchList());
         expected.sort(Comparator.comparing(Watch::getPrice));
 
         Field watchesField = WatchServiceImpl.class.getDeclaredField(LIST_NAME);
         watchesField.setAccessible(true);
-
-        List<Watch> watchesToAdd = buildWatchList();
-
-        watchesField.set(service, watchesToAdd);
+        watchesField.set(service, watches);
 
         List<Watch> actual = service.getSortedByPrice();
 
@@ -121,36 +122,42 @@ class WatchServiceImplTest {
 
     private List<Watch> buildWatchList() {
         Watch watch1 = new Watch.Builder()
-                .brand(Brand.ARMANI)
-                .price(new BigDecimal(150.0))
-                .color(Color.BLACK)
-                .mechanism(Mechanism.MECHANICAL)
-                .type(Type.WRIST)
-                .arrivalDate(LocalDate.now())
+                .arrivalDate(LocalDate.of(1999, 1, 1))
+                .type(Type.valueOf("DESKTOP"))
+                .mechanism(Mechanism.valueOf("KINETIC"))
+                .price(BigDecimal.valueOf(200))
+                .color(Color.valueOf("BLACK"))
+                .brand(Brand.valueOf("ARMANI"))
                 .build();
 
         Watch watch2 = new Watch.Builder()
-                .brand(Brand.CASIO)
-                .price(new BigDecimal(200.0))
-                .color(Color.METAL_BLUE)
-                .mechanism(Mechanism.KINETIC)
-                .type(Type.WRIST)
-                .arrivalDate(LocalDate.now())
+                .arrivalDate(LocalDate.of(2023, 3, 3))
+                .type(Type.valueOf("WALL"))
+                .mechanism(Mechanism.valueOf("QUARTZ"))
+                .price(BigDecimal.valueOf(50))
+                .color(Color.valueOf("BLACK"))
+                .brand(Brand.valueOf("DW"))
                 .build();
 
-        return List.of(watch1, watch2);
+        Watch watch3 = new Watch.Builder()
+                .arrivalDate(LocalDate.of(2000, 2, 2))
+                .type(Type.valueOf("WRIST"))
+                .mechanism(Mechanism.valueOf("MECHANICAL"))
+                .price(BigDecimal.valueOf(100))
+                .color(Color.valueOf("WHITE"))
+                .brand(Brand.valueOf("CASIO"))
+                .build();
+
+        return List.of(watch1, watch2, watch3);
     }
 
-    private int getWatchesListSize(WatchService service) {
-        List<Watch> watches = emptyList();
+    private void setFiled(List<Watch> watches) {
         try {
             Field watchesField = WatchServiceImpl.class.getDeclaredField(LIST_NAME);
             watchesField.setAccessible(true);
-            watches = (List<Watch>) watchesField.get(service);
-
+            watchesField.set(service, watches);
         }catch (Exception e) {
             fail(e);
         }
-        return watches.size();
     }
 }

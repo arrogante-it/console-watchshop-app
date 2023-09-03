@@ -10,7 +10,7 @@ public class WatchShopApplication {
         public static void main(String[] args) {
         WatchView view = new WatchView();
         WatchService service = new WatchServiceImpl();
-        InputHandler inputHandler = new InputHandler(System.in);
+        InputHandler inputHandler = new InputHandler();
 
         WatchController controller = new WatchController(view, service, inputHandler);
 

@@ -1,13 +1,12 @@
 package com.watch.shop.app.view;
 
-import java.io.InputStream;
 import java.util.Scanner;
 
 public class InputHandler {
-    private final Scanner scanner;
+    private static Scanner scanner;
 
-    public InputHandler(InputStream inputStream) {
-        scanner = new Scanner(inputStream);
+    public InputHandler() {
+        scanner = new Scanner(System.in);
     }
 
     public String getUserInput() {
