@@ -18,7 +18,7 @@ import java.util.Comparator;
 import java.util.List;
 
 class WatchServiceImplTest {
-    private static final String LIST_NAME = "watches";
+    private static final String WATCHES_FIELD_NAME = "watches";
 
     private static final Brand BRAND = Brand.DW;
     private static final BigDecimal PRICE = BigDecimal.valueOf(322);
@@ -59,7 +59,7 @@ class WatchServiceImplTest {
     void shouldCorrectlyGetAllWatches() {
         List<Watch> expectedList = buildWatchList();
 
-        setWatchesFiled(buildWatchList());
+        setWatchesFiled(expectedList);
 
         List<Watch> actualList = service.getAllWatches();
 
@@ -73,7 +73,7 @@ class WatchServiceImplTest {
         List<Watch> expected = new ArrayList<>(watches);
         expected.sort(Comparator.comparing(Watch::getPrice));
 
-        Field watchesField = WatchServiceImpl.class.getDeclaredField(LIST_NAME);
+        Field watchesField = WatchServiceImpl.class.getDeclaredField(WATCHES_FIELD_NAME);
         watchesField.setAccessible(true);
         watchesField.set(service, watches);
 
@@ -89,7 +89,7 @@ class WatchServiceImplTest {
         List<Watch> expected = new ArrayList<>(buildWatchList());
         expected.sort(Comparator.comparing(Watch::getColor));
 
-        Field watchesField = WatchServiceImpl.class.getDeclaredField(LIST_NAME);
+        Field watchesField = WatchServiceImpl.class.getDeclaredField(WATCHES_FIELD_NAME);
         watchesField.setAccessible(true);
         watchesField.set(service, watches);
 
@@ -105,7 +105,7 @@ class WatchServiceImplTest {
         List<Watch> expected = new ArrayList<>(buildWatchList());
         expected.sort(Comparator.comparing(Watch::getPrice));
 
-        Field watchesField = WatchServiceImpl.class.getDeclaredField(LIST_NAME);
+        Field watchesField = WatchServiceImpl.class.getDeclaredField(WATCHES_FIELD_NAME);
         watchesField.setAccessible(true);
         watchesField.set(service, watches);
 
@@ -161,7 +161,7 @@ class WatchServiceImplTest {
 
     private void setWatchesFiled(List<Watch> watches) {
         try {
-            Field watchesField = WatchServiceImpl.class.getDeclaredField(LIST_NAME);
+            Field watchesField = WatchServiceImpl.class.getDeclaredField(WATCHES_FIELD_NAME);
             watchesField.setAccessible(true);
             watchesField.set(service, watches);
         }catch (Exception e) {
